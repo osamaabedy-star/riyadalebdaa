@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدارس رياض الإبداع | تسجيل الصف الأول الابتدائي 1448هـ</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- moment و moment-hijri -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-hijri/2.1.2/moment-hijri.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f1f6fa 0%, #dee8f0 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+        }
+
+        .main-card {
+            max-width: 950px;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(4px);
+            border-radius: 40px 40px 30px 30px;
+            box-shadow: 0 25px 40px -15px #0b2d4680;
+            overflow: hidden;
+        }
+
+        .gold-strip {
+            height: 8px;
+            background: linear-gradient(90deg, #ffb347, #ffdd99, #ffb347);
+        }
+
+        .header {
+            background: linear-gradient(145deg, #0a3a55, #164b6b);
+            color: white;
+            padding: 18px 25px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            background: #ffb347;
+            width: 55px;
+            height: 55px;
+            border-radius: 18px 8px 18px 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid white;
+        }
+
+        .logo-icon i {
+            font-size: 2.5rem;
+            color: #0a3a55;
+        }
+
+        .logo-text h1 {
+            font-size: 1.7rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .logo-text h1 span {
+            color: #ffb347;
+        }
+
+        .logo-text p {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        .contact-info {
+            background: rgba(255,255,255,0.1);
+            border-radius: 50px;
+            padding: 8px 16px;
+            border: 1px solid #ffb34760;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contact-info i {
+            color: #ffb347;
+            font-size: 1.2rem;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            direction: ltr;
+            background: #ffb34730;
+            padding: 4px 12px;
+            border-radius: 30px;
+        }
+
+        .content {
+            padding: 20px 25px;
+        }
+
+        .register-panel {
+            background: #ffffffd9;
+            border-radius: 25px;
+            padding: 20px;
+            box-shadow: 0 8px 18px #1b3b4f20;
+            border: 1px solid #e6f0f8;
+            margin-bottom: 18px;
+        }
+
+        .register-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .register-header .icon {
+            background: #0a3a55;
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .register-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0a3a55;
+        }
+
+        .register-header h2 small {
+            font-size: 0.75rem;
+            color: #4d748b;
+        }
+
+        .date-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 18px;
+            background: #edf4fa;
+            padding: 5px;
+            border-radius: 50px;
+            width: fit-content;
+        }
+
+        .date-tab {
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            color: #195072;
+        }
+
+        .date-tab.active {
+            background: #0a3a55;
+            color: white;
+        }
+
+        .date-input-container.hidden {
+            display: none;
+        }
+
+        .miladi-group {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .miladi-group label {
+            font-weight: 600;
+            color: #195072;
+            min-width: 100px;
+            font-size: 0.95rem;
+        }
+
+        .miladi-group input[type="date"] {
+            flex: 2;
+            padding: 10px 15px;
+            border: 1.5px solid #bed5e8;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            background: white;
+            min-width: 200px;
+        }
+
+        .hijri-group {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .hijri-fields {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            flex: 2;
+        }
+
+        .hijri-fields input {
+            padding: 8px 10px;
+            border: 1.5px solid #bed5e8;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            text-align: center;
+            min-width: 70px;
+            flex: 1;
+        }
+
+        .check-btn {
+            background: #0a3a55;
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+            border: 1px solid #ffffff70;
+            transition: 0.15s;
+        }
+
+        .check-btn:hover {
+            background: #0b2f44;
+        }
+
+        .result-card {
+            background: #e5f0f9;
+            border-radius: 25px;
+            padding: 20px;
+            border: 3px dashed #ffb347;
+        }
+
+        .result-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #50768f;
+            gap: 10px;
+            min-height: 130px;
+        }
+
+        .result-placeholder i {
+            font-size: 3rem;
+            opacity: 0.4;
+        }
+
+        .result-placeholder p {
+            font-size: 1rem;
+        }
+
+        .result-content {
+            display: none;
+        }
+
+        .level-badge {
+            display: inline-block;
+            background: #0a3a55;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            border: 2px solid #ffb347;
+        }
+
+        .info-box {
+            background: white;
+            border-radius: 20px;
+            padding: 18px;
+            font-size: 0.95rem;
+            color: #154256;
+            margin: 15px 0;
+            border: 1px solid #c7ddec;
+        }
+
+        .register-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #ffb347;
+            color: #0a3a55;
+            font-weight: 700;
+            font-size: 1.2rem;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            border: 2px solid white;
+            margin: 8px 0;
+        }
+
+        .footnote {
+            background: #d6e6f3;
+            border-radius: 50px;
+            padding: 10px 18px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer {
+            background: #d2e2ef;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 0.9rem;
+            border-top: 2px solid #ffb347;
+        }
+
+        .footer .phone-number {
+            direction: ltr;
+            background: white;
+            padding: 4px 15px;
+            border-radius: 40px;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: #25d366;
+            color: white;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 10px 18px #25d36680;
+            z-index: 99;
+            border: 3px solid white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://wa.me/966554213311" class="whatsapp-float" target="_blank" title="تواصل معنا عبر الواتساب">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <div class="main-card">
+        <div class="gold-strip"></div>
+        <div class="header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>مدارس <span>رياض الإبداع</span></h1>
+                    <p><i class="fas fa-map-marker-alt" style="color:#ffb347;"></i> المجمعة - حي الفيحاء</p>
+                </div>
+            </div>
+            <div class="contact-info">
+                <i class="fab fa-whatsapp"></i>
+                <span>تواصل:</span>
+                <a href="https://wa.me/966554213311" target="_blank">+966 55 421 3311</a>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="register-panel">
+                <div class="register-header">
+                    <div class="icon"><i class="fas fa-calendar-alt"></i></div>
+                    <h2>تحديد المرحلة <small>أدخل تاريخ الميلاد</small></h2>
+                </div>
+
+                <div class="date-tabs">
+                    <button class="date-tab active" id="tabMiladi">ميلادي</button>
+                    <button class="date-tab" id="tabHijri">هجري</button>
+                </div>
+
+                <div id="miladiInput" class="date-input-container">
+                    <div class="miladi-group">
+                        <label>تاريخ الميلاد:</label>
+                        <input type="date" id="miladiDate" min="2015-01-01" max="2024-12-31">
+                    </div>
+                </div>
+
+                <div id="hijriInput" class="date-input-container hidden">
+                    <div class="hijri-group">
+                        <label>التاريخ الهجري:</label>
+                        <div class="hijri-fields">
+                            <input type="number" id="hijriDay" placeholder="يوم" min="1" max="30">
+                            <input type="number" id="hijriMonth" placeholder="شهر" min="1" max="12">
+                            <input type="number" id="hijriYear" placeholder="سنة" min="1400" max="1450">
+                        </div>
+                    </div>
+                </div>
+
+                <button class="check-btn" id="checkBtn"><i class="fas fa-search"></i> تحقق</button>
+            </div>
+
+            <div class="result-card" id="resultCard">
+                <div class="result-placeholder" id="placeholder">
+                    <i class="fas fa-child"></i>
+                    <p>أدخل التاريخ واضغط تحقق</p>
+                </div>
+                <div class="result-content" id="resultContent">
+                    <div class="level-badge" id="levelBadge">الصف الأول الابتدائي</div>
+                    <div class="info-box" id="infoBox"></div>
+                    <div id="linkContainer"></div>
+                    <div class="footnote" id="footnote">
+                        <i class="fas fa-info-circle"></i> <span id="noteText"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <span><i class="fas fa-map-pin"></i> محافظة المجمعة - حي الفيحاء</span>
+            <span class="phone-number"><i class="fab fa-whatsapp"></i> <a href="https://wa.me/966554213311" style="color:#0a3a55;">+966 55 421 3311</a></span>
+            <span><i class="fas fa-envelope"></i> info@riyadalebdaa.edu.sa</span>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const tabMiladi = document.getElementById('tabMiladi');
+            const tabHijri = document.getElementById('tabHijri');
+            const miladiInput = document.getElementById('miladiInput');
+            const hijriInput = document.getElementById('hijriInput');
+            const miladiDate = document.getElementById('miladiDate');
+            const hijriDay = document.getElementById('hijriDay');
+            const hijriMonth = document.getElementById('hijriMonth');
+            const hijriYear = document.getElementById('hijriYear');
+            const checkBtn = document.getElementById('checkBtn');
+            const placeholder = document.getElementById('placeholder');
+            const resultContent = document.getElementById('resultContent');
+            const levelBadge = document.getElementById('levelBadge');
+            const infoBox = document.getElementById('infoBox');
+            const linkContainer = document.getElementById('linkContainer');
+            const noteText = document.getElementById('noteText');
+
+            const GRADE1_LINK = "https://forms.gle/XSFhEaUk9vcN5FnY7";
+
+            const CUTOFF_GRADE1_FIRST = moment('2020-08-24');
+            const CUTOFF_GRADE1_SECOND_START = moment('2020-08-25');
+            const CUTOFF_GRADE1_SECOND_END = moment('2020-11-22');
+            const CUTOFF_KG3_END = moment('2021-08-24');
+            const CUTOFF_KG2_END = moment('2022-08-24');
+            const CUTOFF_KG1_END = moment('2023-08-24');
+
+            tabMiladi.addEventListener('click', function() {
+                tabMiladi.classList.add('active');
+                tabHijri.classList.remove('active');
+                miladiInput.classList.remove('hidden');
+                hijriInput.classList.add('hidden');
+            });
+
+            tabHijri.addEventListener('click', function() {
+                tabHijri.classList.add('active');
+                tabMiladi.classList.remove('active');
+                hijriInput.classList.remove('hidden');
+                miladiInput.classList.add('hidden');
+            });
+
+            function hijriToMiladi(day, month, year) {
+                if (!day || !month || !year) return null;
+                const hijriMoment = moment(`${year}-${month}-${day}`, 'iYYYY-iM-iD');
+                return hijriMoment.isValid() ? hijriMoment : null;
+            }
+
+            function checkLevel() {
+                let birthMoment = null;
+
+                if (!miladiInput.classList.contains('hidden')) {
+                    const dateStr = miladiDate.value;
+                    if (!dateStr) { alert('أدخل التاريخ الميلادي'); return; }
+                    birthMoment = moment(dateStr);
+                    if (!birthMoment.isValid()) { alert('تاريخ ميلادي غير صحيح'); return; }
+                } else {
+                    const day = parseInt(hijriDay.value, 10);
+                    const month = parseInt(hijriMonth.value, 10);
+                    const year = parseInt(hijriYear.value, 10);
+                    if (isNaN(day) || isNaN(month) || isNaN(year)) { alert('أكمل جميع الحقول الهجرية'); return; }
+                    birthMoment = hijriToMiladi(day, month, year);
+                    if (!birthMoment) { alert('تاريخ هجري غير صحيح'); return; }
+                }
+
+                placeholder.style.display = 'none';
+                resultContent.style.display = 'block';
+                linkContainer.innerHTML = '';
+
+                let levelText = '', infoMessage = '', note = '', showLink = false;
+
+                if (birthMoment.isSameOrBefore(CUTOFF_GRADE1_FIRST)) {
+                    levelText = 'الصف الأول الابتدائي';
+                    infoMessage = '✅ الطفل أكمل 6 سنوات قبل 24 أغسطس 2026م.';
+                    note = '✔️ مؤهل مباشرة للتسجيل.';
+                    showLink = true;
+                }
+                else if (birthMoment.isBetween(CUTOFF_GRADE1_SECOND_START, CUTOFF_GRADE1_SECOND_END, null, '[]')) {
+                    levelText = 'الصف الأول الابتدائي (بشرط)';
+                    infoMessage = '⚠️ عمر الطفل ينقص حتى 90 يوماً.';
+                    note = '✔️ يشترط دراسة سنة في رياض الأطفال.';
+                    showLink = true;
+                }
+                else if (birthMoment.isAfter(CUTOFF_GRADE1_SECOND_END) && birthMoment.isSameOrBefore(CUTOFF_KG3_END)) {
+                    levelText = 'مرحلة رياض الأطفال (KG3)';
+                    infoMessage = '👧🏻 الطفل في سن KG3 (5 سنوات).';
+                    note = 'مدارس رياض الإبداع لا تضم حالياً أقسام رياض أطفال.';
+                    showLink = false;
+                }
+                else if (birthMoment.isAfter(CUTOFF_KG3_END) && birthMoment.isSameOrBefore(CUTOFF_KG2_END)) {
+                    levelText = 'مرحلة رياض الأطفال (KG2)';
+                    infoMessage = '🧸 الطفل في سن KG2 (4 سنوات).';
+                    note = 'لا يوجد روضة أطفال في مدارسنا حالياً.';
+                    showLink = false;
+                }
+                else if (birthMoment.isAfter(CUTOFF_KG2_END) && birthMoment.isSameOrBefore(CUTOFF_KG1_END)) {
+                    levelText = 'مرحلة رياض الأطفال (KG1)';
+                    infoMessage = '🍼 الطفل في سن KG1 (3 سنوات).';
+                    note = 'نأسف، لا يوجد روضة.';
+                    showLink = false;
+                }
+                else if (birthMoment.isBefore('2015-01-01')) {
+                    levelText = 'أكبر من السن النظامي';
+                    infoMessage = '📌 عمر الطفل أكبر من 6 سنوات.';
+                    note = 'يرجى مراجعة المدرسة.';
+                    showLink = true;
+                }
+                else {
+                    levelText = 'أقل من السن المطلوب';
+                    infoMessage = '🔸 عمر الطفل أقل من 3 سنوات.';
+                    note = 'سيتم فتح التسجيل لاحقاً.';
+                    showLink = false;
+                }
+
+                levelBadge.textContent = levelText;
+                infoBox.innerHTML = `<i class="fas fa-info-circle" style="margin-left:8px;"></i> ${infoMessage}`;
+                noteText.textContent = note;
+
+                if (showLink) {
+                    linkContainer.innerHTML = `<a href="${GRADE1_LINK}" target="_blank" class="register-link-btn"><i class="fas fa-pencil-alt"></i> تسجيل الصف الأول</a>`;
+                }
+            }
+
+            checkBtn.addEventListener('click', checkLevel);
+            miladiDate.value = '';
+            hijriDay.value = ''; hijriMonth.value = ''; hijriYear.value = '';
+            placeholder.style.display = 'flex';
+            resultContent.style.display = 'none';
+        })();
+    </script>
+</body>
+</html>
